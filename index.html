@@ -30,9 +30,10 @@
 
     .photos {
       display: flex;
-      justify-content: space-around;
+      justify-content: center;
+      gap: 24px;
       margin-bottom: 25px;
-      gap: 20px;
+      flex-wrap: wrap; 
     }
 
     .photo {
@@ -91,22 +92,15 @@
     }
 
     /* Адаптация под мобильные */
-    @media (max-width: 500px) {
-      .photos {
-        flex-direction: column;
-        align-items: center;
-      }
-      .photo {
-        width: 100px;
-        height: 100px;
-      }
-      h1 {
-        font-size: 22px;
-      }
-      p {
-        font-size: 16px;
-      }
+    @media (max-width: 360px) {
+    .photo {
+      width: 90px;
+      height: 90px;
     }
+    .photos {
+      gap: 16px;
+    }
+  }
   </style>
 </head>
 <body>
@@ -115,7 +109,7 @@
     <div class="heart" ></div>
     <h1>С Днём святого Валентина!</h1>
     <p>Каждый момент с тобой — как маленькое чудо. Спасибо, что ты есть, я тебя очень сильно люблю ❤️</p>
-
+    
     <div class="photos">
       <img src="photo1.jpg" alt="Я" class="photo">
       <img src="photo2.jpg" alt="Ты" class="photo">
@@ -126,6 +120,10 @@
       <img src="photo4.jpg" alt="Ты" class="photo">
     </div>
 
+    <div class="photos">
+      <img src="photo5.jpg" alt="Я" class="photo">
+      <img src="photo6.jpg" alt="Ты" class="photo">
+    </div>
   </div>
 </body>
 </html>
