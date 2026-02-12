@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Для тебя, моя любовь ❤️</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #fff9f9;
+      font-family: 'Segoe UI', sans-serif;
+      color: #d46a90;
+    }
+
+    .container {
+      text-align: center;
+    }
+
+    .heart {
+      position: relative;
+      width: 120px;
+      height: 108px;
+      margin: 0 auto 20px;
+      animation: pulse 1.4s infinite ease-in-out;
+    }
+
+    .heart:before,
+    .heart:after {
+      position: absolute;
+      content: "";
+      left: 60px;
+      top: 0;
+      width: 60px;
+      height: 90px;
+      background: #ff69b4;
+      border-radius: 60px 60px 0 0;
+      transform: rotate(-45deg);
+      transform-origin: 0 100%;
+    }
+
+    .heart:after {
+      left: 0;
+      transform: rotate(45deg);
+      transform-origin: 100% 100%;
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.15);
+      }
+    }
+
+    h1 {
+      font-size: 24px;
+      margin: 0;
+      letter-spacing: 1px;
+    }
+
+    p {
+      font-size: 18px;
+      margin-top: 15px;
+      max-width: 300px;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="heart"></div>
+    <h1>С Днём святого Валентина!</h1>
+    <p>Ты — моё самое большое счастье. Люблю тебя бесконечно ❤️</p>
+  </div>
+</body>
+</html>
