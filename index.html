@@ -10,6 +10,55 @@
       padding: 0;
       box-sizing: border-box;
     }
+    #puzzle-loader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: #000;
+      display: grid;
+      place-items: center;
+      z-index: 1000;
+      opacity: 1;
+      transition: opacity 0.8s ease;
+    }
+
+    .puzzle-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 200px);
+      grid-template-rows: repeat(3, 200px);
+      gap: 4px; 
+    }
+
+    .puzzle-piece {
+      width: 200px;
+      height: 200px;
+      background-image: url('photo7.jpg');
+      background-size: 800px 600px; /* 4*200 x 3*200 */
+      opacity: 0;
+      animation: appear 0.5s forwards;
+    }
+
+    /* Анимация появления кусочков */
+    @keyframes appear {
+      to { opacity: 1; }
+    }
+
+    /* Основной контент (изначально скрыт) */
+    #main-content {
+      opacity: 0;
+      transition: opacity 1s;
+    }
+
+    body.loaded #main-content {
+      opacity: 1;
+    }
+
+    body.loaded #puzzle-loader {
+      opacity: 0;
+      pointer-events: none;
+    }
 
     body {
       background: #fff9f9;
@@ -37,8 +86,8 @@
     }
 
     .photo {
-      width: 380px;
-      height: 380px;
+      width: 420px;
+      height: 420px;
       border-radius: 50%;
       object-fit: cover;
       border: 3px solid #ff69b4;
@@ -92,18 +141,34 @@
     }
 
     /* Адаптация под мобильные */
-    @media (max-width: 360px) {
-    .photo {
-      width: 90px;
-      height: 90px;
+    @media (max-width: 500px) {
+      .photo {
+        width: 100px;
+        height: 100px;
+      }
+      .photos {
+        gap: 16px;
+      }
+      .puzzle-grid {
+        grid-template-columns: repeat(4, 80px);
+        grid-template-rows: repeat(3, 80px);
+        gap: 3px;
+      }
+      .puzzle-piece {
+        width: 80px;
+        height: 80px;
+        background-size: 320px 240px; /* 4*80 x 3*80 */
+      }
     }
-    .photos {
-      gap: 16px;
-    }
-  }
+
   </style>
 </head>
 <body>
+
+  <div id="puzzle-loader">
+    <div class="puzzle-grid" id="puzzle"></div>
+  </div>
+
   <div class="container">
 
     <div class="heart" ></div>
@@ -125,5 +190,58 @@
       <img src="photo6.jpg" alt="Ты" class="photo">
     </div>
   </div>
+  <script>
+    function getPuzzleTileSize() {
+      return window.innerWidth <= 500 ? 80 : 200;
+    }
+
+    function createPuzzle() {
+      const puzzleGrid = document.getElementById('puzzle');
+      puzzleGrid.innerHTML = ''; // очистить, если вызывается повторно
+
+      const tileSize = getPuzzleTileSize();
+      const cols = 4;
+      const rows = 3;
+      const totalPieces = cols * rows;
+
+      for (let i = 0; i < totalPieces; i++) {
+        const piece = document.createElement('div');
+        piece.className = 'puzzle-piece';
+
+        const row = Math.floor(i / cols);
+        const col = i % cols;
+
+        // Динамически задаём background-size и background-position
+        piece.style.backgroundImage = "url('photo7.jpg')";
+        piece.style.backgroundSize = `${cols * tileSize}px ${rows * tileSize}px`;
+        piece.style.width = tileSize + 'px';
+        piece.style.height = tileSize + 'px';
+        piece.style.backgroundPosition = `-${col * tileSize}px -${row * tileSize}px`;
+
+        // Случайная задержка (можно оставить)
+        piece.style.animationDelay = `${Math.random() * 1.2}s`;
+
+        puzzleGrid.appendChild(piece);
+      }
+    }
+
+    // Создаём пазл при загрузке
+    window.addEventListener('load', () => {
+      createPuzzle();
+
+      // Через 2.5 сек — показываем основной контент
+      setTimeout(() => {
+        document.body.classList.add('loaded');
+      }, 2500);
+    });
+
+    // (Опционально) Пересоздавать пазл при изменении ориентации
+    window.addEventListener('resize', () => {
+      // Только если загрузочный экран ещё виден
+      if (!document.body.classList.contains('loaded')) {
+        createPuzzle();
+      }
+    });
+  </script>
 </body>
 </html>
