@@ -5,27 +5,50 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Для тебя, моя любовь ❤️</title>
   <style>
-    body {
+    * {
       margin: 0;
       padding: 0;
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      box-sizing: border-box;
+    }
+
+    body {
       background: #fff9f9;
       font-family: 'Segoe UI', sans-serif;
       color: #d46a90;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
     }
 
     .container {
       text-align: center;
+      max-width: 900px;
+      width: 100%;
+    }
+
+    .photos {
+      display: flex;
+      justify-content: space-around;
+      margin-bottom: 25px;
+      gap: 20px;
+    }
+
+    .photo {
+      width: 420px;
+      height: 420px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid #ff69b4;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     }
 
     .heart {
       position: relative;
       width: 120px;
       height: 108px;
-      margin: 0 auto 20px;
+      margin: 0 auto 25px;
       animation: pulse 1.4s infinite ease-in-out;
     }
 
@@ -50,33 +73,59 @@
     }
 
     @keyframes pulse {
-      0%, 100% {
-        transform: scale(1);
-      }
-      50% {
-        transform: scale(1.15);
-      }
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.15); }
     }
 
     h1 {
-      font-size: 24px;
-      margin: 0;
+      font-size: 26px;
+      margin-bottom: 15px;
       letter-spacing: 1px;
     }
 
     p {
       font-size: 18px;
-      margin-top: 15px;
-      max-width: 300px;
-      line-height: 1.5;
+      line-height: 1.6;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    /* Адаптация под мобильные */
+    @media (max-width: 500px) {
+      .photos {
+        flex-direction: column;
+        align-items: center;
+      }
+      .photo {
+        width: 100px;
+        height: 100px;
+      }
+      h1 {
+        font-size: 22px;
+      }
+      p {
+        font-size: 16px;
+      }
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <div class="heart"></div>
+
+    <div class="heart" ></div>
     <h1>С Днём святого Валентина!</h1>
-    <p>Ты — моё самое большое счастье. Люблю тебя бесконечно ❤️</p>
+    <p>Каждый момент с тобой — как маленькое чудо. Спасибо, что ты есть, я тебя очень сильно люблю ❤️</p>
+
+    <div class="photos">
+      <img src="photo1.jpg" alt="Я" class="photo">
+      <img src="photo2.jpg" alt="Ты" class="photo">
+    </div>
+
+    <div class="photos">
+      <img src="photo3.jpg" alt="Я" class="photo">
+      <img src="photo4.jpg" alt="Ты" class="photo">
+    </div>
+
   </div>
 </body>
 </html>
